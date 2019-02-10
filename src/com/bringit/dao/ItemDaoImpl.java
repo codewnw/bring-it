@@ -1,10 +1,12 @@
 package com.bringit.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.bringit.dao.util.DbUtil;
@@ -14,7 +16,15 @@ public class ItemDaoImpl implements ItemDao {
 
 	@Override
 	public int saveItem(Item item) {
-		// TODO Auto-generated method stub
+		try (Connection con = DbUtil.getConn();
+				PreparedStatement pstmt = con.prepareStatement("INSERT INTO BIT_ITEM VALUES(?, ?, ?)")) {
+			pstmt.setString(1, item.getId());
+			pstmt.setString(2, item.getName());
+			pstmt.setDouble(3, item.getPrice());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
@@ -48,8 +58,17 @@ public class ItemDaoImpl implements ItemDao {
 
 	@Override
 	public List<Item> getItems() {
-		// TODO Auto-generated method stub
-		return null;
+		try (Connection con = DbUtil.getConn(); Statement stmt = con.createStatement()) {
+			ResultSet rs = stmt.executeQuery("SELECT * FROM BIT_ITEM");
+			List<Item> items = new ArrayList<>();
+			while(rs.next()) {
+				items.add(new Item(rs.getString(1), rs.getString(2), rs.getDouble(3)));
+			}
+			return items;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
 	}
 
 }
