@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.bringit.dao.util.DatabaseMetaDataUtil;
 import com.bringit.dao.util.DbUtil;
 import com.bringit.model.Item;
 
@@ -49,7 +50,7 @@ public class ItemDaoImpl implements ItemDao {
 		try (Connection con = DbUtil.getConn(); Statement stmt = con.createStatement()) {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM BIT_ITEM WHERE ID = '" + itemId + "'");
 			rs.next();
-			return new Item(rs.getString(1), rs.getString(2), rs.getDouble(3));
+			return new Item();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -61,8 +62,8 @@ public class ItemDaoImpl implements ItemDao {
 		try (Connection con = DbUtil.getConn(); Statement stmt = con.createStatement()) {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM BIT_ITEM");
 			List<Item> items = new ArrayList<>();
-			while(rs.next()) {
-				items.add(new Item(rs.getString(1), rs.getString(2), rs.getDouble(3)));
+			while (rs.next()) {
+				items.add(new Item());
 			}
 			return items;
 		} catch (SQLException e) {
@@ -71,4 +72,18 @@ public class ItemDaoImpl implements ItemDao {
 		return Collections.emptyList();
 	}
 
+	@Override
+	public void createItemTable() {
+		if (!DatabaseMetaDataUtil.isTableExists("bit_item")) {
+			try (Connection con = DbUtil.getConn(); Statement stmt = con.createStatement()) {
+				boolean b = stmt.execute(
+						"CREATE TABLE bit_item(ID VARCHAR, NAME VARCHAR(50), DESCRIPTION VARCHAR(200), IMAGE_URL VARCHAR(200), CATEGORY VARCHAR(50), PRICE DECIMAL, QUANTITY NUMBER);");
+				if (!b) {
+					System.out.println("Item Table created successfully.");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

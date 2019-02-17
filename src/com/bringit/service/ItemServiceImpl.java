@@ -39,4 +39,9 @@ public class ItemServiceImpl implements ItemService {
 		return itemDao.getItems();
 	}
 
+	@Override
+	public void createItemTable() {
+		itemDao.createItemTable();
+	}
+
 }

@@ -53,7 +53,7 @@ public class ItemServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		Double price = Double.parseDouble(request.getParameter("price"));
 		String id = IdUtil.getItemId();
-		Item item = new Item(id, name, price);
+		Item item = new Item();
 		itemService.saveItem(item);
 	}
 

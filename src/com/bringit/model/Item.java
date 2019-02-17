@@ -1,28 +1,67 @@
 package com.bringit.model;
 
 public class Item {
-	
+
 	private String id;
-	
+
 	private String name;
-	
+
 	private Double price;
+
+	private String imageUrl;
+
+	private String description;
+
+	private int quantity;
+
+	private String category;
 
 	public Item() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Item(String id, String name, Double price) {
-		super();
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public Item(String id, String name, Double price, String imageUrl, String description, int quantity,
+			String category) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
+		this.imageUrl = imageUrl;
+		this.description = description;
+		this.quantity = quantity;
+		this.category = category;
 	}
 
-	@Override
-	public String toString() {
-		return "Item [id=" + id + ", name=" + name + ", price=" + price + "]";
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getQuanity() {
+		return quantity;
+	}
+
+	public void setQuanity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getId() {

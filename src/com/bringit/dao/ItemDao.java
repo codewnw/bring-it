@@ -5,6 +5,8 @@ import java.util.List;
 import com.bringit.model.Item;
 
 public interface ItemDao {
+	void createItemTable();
+	
 	int saveItem(Item item);
 
 	int updateItem(Item item);

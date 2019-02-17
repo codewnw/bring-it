@@ -1,3 +1,2 @@
-create table bit_item(id varchar, name varchar, price decimal);
-
-insert into bit_item values('104', 'Item Four', 104.1);
+DROP TABLE bit_item;
+CREATE TABLE bit_item( ID VARCHAR, NAME VARCHAR(50), DESCRIPTION VARCHAR(200), IMAGE_URL VARCHAR(200), CATEGORY VARCHAR(50), PRICE DECIMAL, QUANTITY NUMBER);

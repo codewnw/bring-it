@@ -5,6 +5,8 @@ import java.util.List;
 import com.bringit.model.Item;
 
 public interface ItemService {
+	void createItemTable();
+	
 	int saveItem(Item item);
 
 	int updateItem(Item item);
