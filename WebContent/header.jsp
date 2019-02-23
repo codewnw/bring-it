@@ -12,9 +12,9 @@
 <a class="btn btn-primary" href="index.jsp">Home</a> 
   <a class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Item</a>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="add-item.jsp">Add Item</a>
+    <a class="dropdown-item" href="${pageContext.request.contextPath}/add-item.jsp">Add Item</a>
     <a class="dropdown-item" href="#">Update Item</a>
-    <a class="dropdown-item" href="items/all">View All Items</a>
+    <a class="dropdown-item" href="${pageContext.request.contextPath}/items/all">View All Items</a>
   </div>
 </div>
 <hr />

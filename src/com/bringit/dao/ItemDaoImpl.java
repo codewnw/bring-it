@@ -18,10 +18,16 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public int saveItem(Item item) {
 		try (Connection con = DbUtil.getConn();
-				PreparedStatement pstmt = con.prepareStatement("INSERT INTO BIT_ITEM VALUES(?, ?, ?)")) {
+				PreparedStatement pstmt = con.prepareStatement("INSERT INTO BIT_ITEM VALUES(?, ?, ?, ?, ?, ?, ?)")) {
+			
 			pstmt.setString(1, item.getId());
 			pstmt.setString(2, item.getName());
-			pstmt.setDouble(3, item.getPrice());
+			pstmt.setString(3, item.getDescription());
+			pstmt.setString(4, item.getImageUrl());
+			pstmt.setString(5, item.getCategory());
+			pstmt.setDouble(6, item.getPrice());
+			pstmt.setInt(7, item.getQuanity());
+			
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -63,7 +69,15 @@ public class ItemDaoImpl implements ItemDao {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM BIT_ITEM");
 			List<Item> items = new ArrayList<>();
 			while (rs.next()) {
-				items.add(new Item());
+				Item item = new Item();
+				item.setId(rs.getString(1));
+				item.setName(rs.getString(2));
+				item.setDescription(rs.getString(3));
+				item.setImageUrl(rs.getString(4));
+				item.setCategory(rs.getString(5));
+				item.setPrice(rs.getDouble(6));
+				item.setQuanity(rs.getInt(7));
+				items.add(item);
 			}
 			return items;
 		} catch (SQLException e) {

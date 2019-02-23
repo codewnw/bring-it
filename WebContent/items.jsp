@@ -13,14 +13,14 @@
 	<%
 		List<Item> items = (List<Item>) request.getAttribute("items");
 		for (Item item : items) {
-	%><img src="${pageContext.request.contextPath}/resources/images/<%= item.getName() %>.jpg" height="200px" width="200px" class="rounded" alt="">
+	%>
+	<img src="${pageContext.request.contextPath}/<%= item.getImageUrl()%>" height="200px" width="200px" class="rounded" alt="">
+	
+	<a href="#" class="btn btn-success" >Buy Now</a>
 	<%
 		}
 	%>
 
-
-
-	<img src="..." class="rounded float-right" alt="...">
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

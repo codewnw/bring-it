@@ -41,7 +41,7 @@ public class ItemServlet extends HttpServlet {
 			} else {
 				System.out.println("Not found");
 			}
-		}else if (url.contains("all")) {
+		} else if (url.contains("all")) {
 			List<Item> items = itemService.getItems();
 			request.setAttribute("items", items);
 			request.getRequestDispatcher("../items.jsp").forward(request, response);
@@ -50,11 +50,30 @@ public class ItemServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String name = request.getParameter("name");
+		String description = request.getParameter("description");
 		Double price = Double.parseDouble(request.getParameter("price"));
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		String imageUrl = request.getParameter("image");
+		String category = request.getParameter("category");
 		String id = IdUtil.getItemId();
+		
 		Item item = new Item();
-		itemService.saveItem(item);
+		item.setName(name);
+		item.setDescription(description);
+		item.setCategory(category);
+		item.setImageUrl(imageUrl);
+		item.setQuanity(quantity);
+		item.setId(id);
+		item.setPrice(price);
+		
+		int i = itemService.saveItem(item);
+		if(i > 0) {
+			response.sendRedirect("all");
+		}else {
+			response.sendRedirect("../add-item.jsp");
+		}
 	}
 
 }
