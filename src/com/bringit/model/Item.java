@@ -12,7 +12,7 @@ public class Item {
 
 	private String description;
 
-	private int quantity;
+	private Integer quantity;
 
 	private String category;
 
@@ -25,7 +25,13 @@ public class Item {
 		return imageUrl;
 	}
 
-	public Item(String id, String name, Double price, String imageUrl, String description, int quantity,
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", name=" + name + ", price=" + price + ", imageUrl=" + imageUrl + ", description="
+				+ description + ", quantity=" + quantity + ", category=" + category + "]";
+	}
+
+	public Item(String id, String name, Double price, String imageUrl, String description, Integer quantity,
 			String category) {
 		this.id = id;
 		this.name = name;
@@ -48,11 +54,11 @@ public class Item {
 		this.description = description;
 	}
 
-	public int getQuanity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuanity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 

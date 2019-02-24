@@ -32,7 +32,9 @@ public class ItemServlet extends HttpServlet {
 			System.out.println("--------");
 			String[] urlArray = url.split("/");
 			Item item = itemService.getItem(urlArray[urlArray.length - 1]);
+			request.setAttribute("item", item);
 			System.out.println(item);
+			request.getRequestDispatcher("../../item.jsp").forward(request, response);
 		} else if (url.contains("delete")) {
 			String[] urlArray = url.split("/");
 			int i = itemService.deleteItem(urlArray[urlArray.length - 1]);
@@ -54,7 +56,7 @@ public class ItemServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
 		Double price = Double.parseDouble(request.getParameter("price"));
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
 		String imageUrl = request.getParameter("image");
 		String category = request.getParameter("category");
 		String id = IdUtil.getItemId();
@@ -64,7 +66,7 @@ public class ItemServlet extends HttpServlet {
 		item.setDescription(description);
 		item.setCategory(category);
 		item.setImageUrl(imageUrl);
-		item.setQuanity(quantity);
+		item.setQuantity(quantity);
 		item.setId(id);
 		item.setPrice(price);
 		
