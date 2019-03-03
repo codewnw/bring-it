@@ -25,6 +25,12 @@
 			<div style="float: left; width: 100%;">
 				<a href="#" class="btn btn-success btn-block">Buy Now</a>
 			</div>
+			<div style="float: left; width: 100%;">
+				<a href="${pageContext.request.contextPath}/items/update/${item.id}" class="btn btn-primary btn-block">Update</a>
+			</div>
+			<div style="float: left; width: 100%;">
+				<a href="${pageContext.request.contextPath}/items/delete/${item.id}" class="btn btn-danger btn-block">Delete</a>
+			</div>
 		</div>
 	</c:forEach>
 

@@ -37,7 +37,21 @@ public class ItemDaoImpl implements ItemDao {
 
 	@Override
 	public int updateItem(Item item) {
-		// TODO Auto-generated method stub
+		try (Connection con = DbUtil.getConn();
+				PreparedStatement pstmt = con.prepareStatement(
+						"UPDATE BIT_ITEM SET NAME = ?, DESCRIPTION = ?, IMAGE_URL = ?, CATEGORY = ?, PRICE = ?, QUANTITY = ? WHERE ID = ?")) {
+			pstmt.setString(1, item.getName());
+			pstmt.setString(2, item.getDescription());
+			pstmt.setString(3, item.getImageUrl());
+			pstmt.setString(4, item.getCategory());
+			pstmt.setDouble(5, item.getPrice());
+			pstmt.setInt(6, item.getQuantity());
+			pstmt.setString(7, item.getId());
+
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
